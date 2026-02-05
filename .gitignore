@@ -39,3 +39,9 @@
 
 # debug information files
 *.dwo
+
+.vs/
+*.VC.db
+*.VC.opendb
+*.db-shm
+*.db-wal
