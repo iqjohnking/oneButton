@@ -11,12 +11,6 @@
 *.gch
 *.pch
 
-# Linker files
-*.ilk
-
-# Debugger Files
-*.pdb
-
 # Compiled Dynamic libraries
 *.so
 *.dylib
@@ -37,11 +31,34 @@
 *.out
 *.app
 
-# debug information files
-*.dwo
-
+# Visual Studio
 .vs/
-*.VC.db
-*.VC.opendb
-*.db-shm
-*.db-wal
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build output
+x64/
+Debug/
+Release/
+bin/
+build/
+
+# C++ Intermediate files
+*.ipch
+*.pdb
+*.ilk
+*.tlog
+*.log
+*.cache
+*.db
+*.opendb
+
+# Shader Cache (DX)
+*.cso
+*.pso
+
+# Windows
+Thumbs.db
+Desktop.ini
