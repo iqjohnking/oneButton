@@ -29,10 +29,10 @@ struct PS_IN
 struct LIGHT
 {
 	bool Enable;
-	bool3 Dummy; // Padding //
-	float4 Dirction;
-	float4 Diffuse;
 	float4 Ambient;
+	float4 Diffuse;
+	float4 Direction;
+	bool3 Dummy; // Padding //
 };
 
 cbuffer LightBuffer : register(b3)

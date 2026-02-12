@@ -1,20 +1,20 @@
-#include	"TestModel.h"
+#include "GolfBall.h"
 
 using namespace DirectX::SimpleMath;
 
 //=======================================
 //初期化処理
 //=======================================
-void TestModel::Init()
+void GolfBall::Init()
 {
 	// メッシュ読み込み
 	StaticMesh staticmesh;
 
 	//3Dモデルデータ
-	std::u8string modelFile = u8"assets/model/cylinder/cylinder.obj";
+	std::u8string modelFile = u8"assets/model/golfball/golf_ball.obj";
 
 	//テクスチャディレクトリ
-	std::string texDirectory = "assets/model/cylinder";
+	std::string texDirectory = "assets/model/golfball";
 
 	//Meshを読み込む
 	std::string tmpStr1(reinterpret_cast<const char*>(modelFile.c_str()), modelFile.size());
@@ -44,21 +44,21 @@ void TestModel::Init()
 		m->Create(materials[i]);
 
 		// マテリアルオブジェクトを配列に追加
-		m_Materiales.push_back(std::move(m));
+		m_Materials.push_back(std::move(m));
 	}
 
-	//大きさを設定
-	m_Scale.x = 5;
-	m_Scale.y = 5;
-	m_Scale.z = 5;
+	//モデルによってスケールを調整
+	m_Scale.x = 1;
+	m_Scale.y = 1;
+	m_Scale.z = 1;
 
-	m_Position.y = 5.0f;
+	m_Position.y = 3.0f;
 }
 
 //=======================================
 //更新処理
 //=======================================
-void TestModel::Update()
+void GolfBall::Update()
 {
 
 }
@@ -66,7 +66,7 @@ void TestModel::Update()
 //=======================================
 //描画処理
 //=======================================
-void TestModel::Draw(Camera* cam)
+void GolfBall::Draw(Camera* cam)
 {
 	//カメラを選択する
 	cam->SetCamera();
@@ -88,25 +88,25 @@ void TestModel::Draw(Camera* cam)
 	//マテリアル数分ループ 
 	for (int i = 0; i < m_subsets.size(); i++)
 	{
-		// マテリアルをセット(サブセット情報の中にあるマテリアルインデックを使用)
-		m_Materiales[m_subsets[i].MaterialIdx]->SetGPU();
+		// マテリアルをセット(サブセット情報の中にあるマテリアルインデックスを使用)
+		m_Materials[m_subsets[i].MaterialIdx]->SetGPU();
 
-		if (m_Materiales[m_subsets[i].MaterialIdx]->isTextureEnable())
+		if (m_Materials[m_subsets[i].MaterialIdx]->isTextureEnable())
 		{
 			m_Textures[m_subsets[i].MaterialIdx]->SetGPU();
 		}
 
 		m_MeshRenderer.DrawSubset(
-			m_subsets[i].IndexNum,    // 描画するインデックス数
-			m_subsets[i].IndexBase,   // 最初のインデックスバッファの位置
-			m_subsets[i].VertexBase); // 頂点バッファの最初から使用
+			m_subsets[i].IndexNum,		// 描画するインデックス数
+			m_subsets[i].IndexBase,		// 最初のインデックスバッファの位置	
+			m_subsets[i].VertexBase);	// 頂点バッファの最初から使用
 	}
 }
 
 //=======================================
 //終了処理
 //=======================================
-void TestModel::Uninit()
+void GolfBall::Uninit()
 {
 
 }

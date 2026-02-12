@@ -1,6 +1,6 @@
 #include	"TestPlane.h"
 
-using namespace DirectX::SimpleMath;
+//using namespace DirectX::SimpleMath;
 
 //=======================================
 //初期化処理
@@ -10,10 +10,10 @@ void TestPlane::Init()
 	// 頂点データ
 	m_Vertices.resize(4);
 
-	m_Vertices[0].position = Vector3(-10,  0,  10);
-	m_Vertices[1].position = Vector3( 10,  0,  10);
-	m_Vertices[2].position = Vector3(-10,  0, -10);
-	m_Vertices[3].position = Vector3( 10,  0, -10);
+	m_Vertices[0].position = Vector3(-10, 0, 10);
+	m_Vertices[1].position = Vector3(10, 0, 10);
+	m_Vertices[2].position = Vector3(-10, 0, -10);
+	m_Vertices[3].position = Vector3(10, 0, -10);
 
 	m_Vertices[0].color = Color(1, 1, 1, 1);
 	m_Vertices[1].color = Color(1, 1, 1, 1);
@@ -24,6 +24,11 @@ void TestPlane::Init()
 	m_Vertices[1].uv = Vector2(1, 0);
 	m_Vertices[2].uv = Vector2(0, 1);
 	m_Vertices[3].uv = Vector2(1, 1);
+
+	m_Vertices[0].normal = Vector3(0, 1, 0);
+	m_Vertices[1].normal = Vector3(0, 1, 0);
+	m_Vertices[2].normal = Vector3(0, 1, 0);
+	m_Vertices[3].normal = Vector3(0, 1, 0);
 
 	// 頂点バッファ生成
 	m_VertexBuffer.Create(m_Vertices);
@@ -40,14 +45,20 @@ void TestPlane::Init()
 	m_IndexBuffer.Create(m_Indices);
 
 	// シェーダオブジェクト生成
-	//m_Shader.Create("shader/unlitTextureVS.hlsl","shader/unlitTexturePS.hlsl");
-	m_Shader.Create("shader/litTextureVS.hlsl","shader/litTexturePS.hlsl");
+	m_Shader.Create("shader/unlitTextureVS.hlsl","shader/unlitTexturePS.hlsl");
+	//m_Shader.Create("shader/litTextureVS.hlsl", "shader/litTexturePS.hlsl");
 
 	//テクスチャ読み込み
 	bool sts = m_Texture.Load("assets/texture/nia.jpg");
 	assert(sts == true);
 
-
+	// マテリアル
+	m_Material = std::make_unique<Material>();
+	MATERIAL mtrl;
+	mtrl.Diffuse = Color(1.0f, 1.0f, 1.0f, 1.0f);
+	mtrl.TextureEnable = true;
+	m_Material->Create(mtrl);
+	//m_Rotation = Vector3(XMConvertToRadians(-90.f) , 0, 0);
 
 }
 
@@ -68,7 +79,7 @@ void TestPlane::Draw(Camera* cam)
 	cam->SetCamera();
 
 	// SRT情報作成
-	Matrix r = Matrix::CreateFromYawPitchRoll(m_Rotation.x, m_Rotation.y, m_Rotation.z);
+	Matrix r = Matrix::CreateFromYawPitchRoll( m_Rotation.y , m_Rotation.x,  m_Rotation.z);
 	Matrix t = Matrix::CreateTranslation(m_Position.x, m_Position.y, m_Position.z);
 	Matrix s = Matrix::CreateScale(m_Scale.x, m_Scale.y, m_Scale.z);
 
@@ -87,6 +98,7 @@ void TestPlane::Draw(Camera* cam)
 	m_VertexBuffer.SetGPU();
 	m_IndexBuffer.SetGPU();
 	m_Texture.SetGPU();
+	m_Material->SetGPU(); // litTextureVSは m_Materialsが必要。
 
 	devicecontext->DrawIndexed(
 		(UINT)m_Indices.size(),	// 描画するインデックス数

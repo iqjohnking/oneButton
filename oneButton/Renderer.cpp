@@ -199,8 +199,8 @@ HRESULT Renderer::Init()
 	light.Enable = FALSE;
 	light.Direction = Vector4(0.5f, -1.0f, 0.0f, 0.0f);
 	light.Direction.Normalize();
-	light.Diffuse = Color(1.0f, 1.0f, 1.0f, 1.0f);	
-	light.Ambient = Color(0.2f, 0.2f, 0.2f, 1.0f);
+	light.Diffuse = Color(1.0f, 1.0f, 1.0f, 1.0f); //平行光源の光
+	light.Ambient = Color(0.5f, 0.5f, 0.5f, 1.0f); //環境光、
 	SetLight(light);
 
 	//マテリアル初期化

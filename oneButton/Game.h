@@ -3,6 +3,7 @@
 
 #include "TestPlane.h"
 #include "TestModel.h"
+#include "GolfBall.h"
 
 class Game
 {
@@ -14,6 +15,7 @@ private:
 	// テストオブジェクト
 	TestPlane m_Plane;
 	TestModel m_Model;
+	GolfBall m_Ball;
 
 public:
 	Game(); // コンストラクタ

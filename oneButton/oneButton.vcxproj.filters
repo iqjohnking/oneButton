@@ -63,6 +63,12 @@
     <ClCompile Include="TestModel.cpp">
       <Filter>object</Filter>
     </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>object</Filter>
+    </ClCompile>
+    <ClCompile Include="GolfBall.cpp">
+      <Filter>object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -123,6 +129,12 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="TestModel.h">
+      <Filter>object</Filter>
+    </ClInclude>
+    <ClInclude Include="GolfBall.h">
+      <Filter>object</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
       <Filter>object</Filter>
     </ClInclude>
   </ItemGroup>
