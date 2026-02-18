@@ -1,14 +1,11 @@
 #pragma once
 #include <iostream>
+#include <array>
+#include <algorithm>
 
-#include "Renderer.h"
 #include "TitleScene.h"
 #include "Stage1Scene.h"
 #include "ResultScene.h"
-
-//#include "TestPlane.h"
-//#include "TestModel.h"
-//#include "GolfBall.h"
 
 enum class SceneName {
 	TITLE,
@@ -46,7 +43,8 @@ public:
 	void ChangeScene(SceneName sceneName); // シーンの切り替え
 	void DeleteObject(Object* obj); // オブジェクトの削除
 	void DeleteAllObjects(); // 全てのオブジェクトの削除
-
+	
+	// オブジェクトの追加
 	template <typename T> T* AddObject()
 	{
 		T* pt = new T();
@@ -54,6 +52,7 @@ public:
 		pt->Init();
 		return pt;
 	}
+	// オブジェクトの取得（型指定）
 	template <typename T> std::vector<T*> GetObjects()
 	{
 		std::vector<T*> result;
@@ -66,7 +65,4 @@ public:
 		}
 		return result;
 	}
-
-
-
 };

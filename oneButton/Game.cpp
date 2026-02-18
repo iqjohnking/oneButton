@@ -81,6 +81,21 @@ void Game::Draw()
 	{
 		obj->Draw(&m_Instance->m_Camera);
 	}
+	//// 1) m_Objects から生描画リストを作成
+	//std::vector<Object*> drawList;
+	//drawList.reserve(m_Instance->m_Objects.size());
+	//for (auto& up : m_Instance->m_Objects) {
+	//	drawList.push_back(up.get());
+	//}
+	//// 2) 手動描画順で安定ソート（同値は生成順を保持）// 小さい順に描画される（背面→前面）
+	//std::stable_sort(drawList.begin(), drawList.end(),
+	//	[](const Object* a, const Object* b) {
+	//		return a->GetDrawOrder() < b->GetDrawOrder();
+	//	});
+	//// 3) 並び替えた順で描画
+	//for (auto* o : drawList) {
+	//	o->Draw(&m_Instance->m_Camera);
+	//}
 
 	// ImGui描画
 	if (m_Instance->m_Scene != nullptr && m_Instance->isShowImgui)

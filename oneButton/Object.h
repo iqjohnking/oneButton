@@ -4,6 +4,10 @@
 
 class Object {
 protected:
+
+	bool isActive = true;            // Šˆ«ó‘Ô‚©‚Ç‚¤‚©
+	int m_DrawOrder = 0;
+
 	// SRTî•ñip¨î•ñj
 	DirectX::SimpleMath::Vector3 m_Position = DirectX::SimpleMath::Vector3(0.0f, 0.0f, 0.0f);
 	DirectX::SimpleMath::Vector3 m_Rotation = DirectX::SimpleMath::Vector3(0.0f, 0.0f, 0.0f);
@@ -22,5 +26,11 @@ public:
 
 	// ˆÊ’u‚Ìæ“¾
 	DirectX::SimpleMath::Vector3 GetPosition() const { return m_Position; }
-	void SetPosition(const DirectX::SimpleMath::Vector3& position) { m_Position = position; };
+	void SetPosition(DirectX::SimpleMath::Vector3 position) { m_Position = position; }
+
+	DirectX::SimpleMath::Vector3 GetRotation() const { return m_Rotation; }
+	void SetRotation(DirectX::SimpleMath::Vector3 rotation) { m_Rotation = rotation; }
+
+	DirectX::SimpleMath::Vector3 GetScale() const { return m_Scale; }
+	void SetScale(DirectX::SimpleMath::Vector3 scale) { m_Scale = scale; }
 };
