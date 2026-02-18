@@ -60,6 +60,11 @@ void Game::Update()
 	{
 		obj->Update();
 	}
+	if (Input::GetKeyTrigger('M'))
+	{
+		m_Instance->isShowImgui = !m_Instance->isShowImgui;
+	}
+
 }
 
 // •`‰æ
@@ -77,20 +82,8 @@ void Game::Draw()
 		obj->Draw(&m_Instance->m_Camera);
 	}
 
-	//ImGui::Begin("Debug");
-	//ImGui::Text("test string");
-	//
-	//
-	//const auto position = m_Model.GetPosition();
-	//float pos[3] = { position.x, position.y, position.z };
-	//if (ImGui::DragFloat3("Model Position", pos, 0.1f))
-	//{
-	//	m_Model.SetPosition(DirectX::SimpleMath::Vector3(pos[0], pos[1], pos[2]));
-	//}
-	//ImGui::End();
-
 	// ImGui•`‰æ
-	if (m_Instance->m_Scene != nullptr)
+	if (m_Instance->m_Scene != nullptr && m_Instance->isShowImgui)
 	{
 		m_Instance->m_Scene->DrawImGui();   // š ƒV[ƒ“–ˆ‚ÌUI
 	}

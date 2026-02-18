@@ -27,14 +27,11 @@ private:
 	// カメラ
 	Camera  m_Camera;
 
+	// オブジェクトのリスト
 	std::vector<std::unique_ptr<Object>> m_Objects; // オブジェクトのリスト
 
-		//====================================================================
-	// テストオブジェクト
-	//TestPlane m_Plane;
-	//TestModel m_Model;
-	//GolfBall m_Ball;
-	//====================================================================
+	// imgui用の変数
+	bool isShowImgui = true; // ImGuiの表示フラグ
 
 public:
 	Game(); // コンストラクタ
@@ -57,7 +54,7 @@ public:
 		pt->Init();
 		return pt;
 	}
-	template <typename T> std::vector<T*> GetObject()
+	template <typename T> std::vector<T*> GetObjects()
 	{
 		std::vector<T*> result;
 		for (const auto& obj : m_Instance->m_Objects)

@@ -100,6 +100,9 @@ void Texture2D::Draw(Camera* cam)
 	//カメラを選択する
 	cam->SetCamera(1);
 
+	// 2D描画では深度を無効化して3Dオブジェクトを遮らない
+	//Renderer::SetDepthEnable(false);
+
 	// SRT情報作成
 	Matrix r = Matrix::CreateFromYawPitchRoll(m_Rotation.y, m_Rotation.x, m_Rotation.z);
 	Matrix t = Matrix::CreateTranslation(m_Position.x, m_Position.y, m_Position.z);
@@ -111,7 +114,6 @@ void Texture2D::Draw(Camera* cam)
 
 	// 新しいワールド行列：ピボットで移動 → スケール → 回転 → 元に戻す → 最後にオブジェクト位置を適用
 	Matrix worldmtx = toPivot * s * r * fromPivot * t;
-	//Matrix worldmtx = toPivot * s * r * t;
 	Renderer::SetWorldMatrix(&worldmtx); // GPUにセット
 
 	// 描画処理
@@ -181,8 +183,6 @@ void Texture2D::Draw(Camera* cam)
 		v= v + vh;
 		vh = -vh;
 	}
-
-
 	Renderer::SetUV(u, v, uw, vh);
 
 	devicecontext->DrawIndexed(

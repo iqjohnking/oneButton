@@ -4,6 +4,8 @@
 #include "Texture2D.h"
 #include "GolfBall.h"
 
+using namespace std;
+
 // コンストラクタ
 TitleScene::TitleScene()
 {
@@ -28,23 +30,37 @@ void TitleScene::Init()
 	bg->SetScale(1920.0f, 1080.0f, 0.0f);
 	m_MySceneObjects.emplace_back(bg);
 
-
-	m_MySceneObjects.emplace_back(Game::GetInstance()->AddObject<GolfBall>());
+	GolfBall* gb = Game::GetInstance()->AddObject<GolfBall>();
+	m_MySceneObjects.emplace_back(gb);
 
 }
 
 void TitleScene::DrawImGui()
 {
-	if (ImGui::Begin("Title Scene"))
+	const bool titleOpen = ImGui::Begin("Title Scene");
+	if (titleOpen)
 	{
-		ImGui::Text("Enter To Stage1");
-		ImGui::End();
-	}	
-	if (ImGui::Begin("Test"))
+		ImGui::Text("testObjs Vector3");
+		vector<GolfBall*> testObjs = Game::GetInstance()->GetObjects<GolfBall>();
+		if (!testObjs.empty())
+		{
+			const auto position = testObjs[0]->GetPosition();
+			float pos[3] = { position.x, position.y, position.z };
+			if (ImGui::DragFloat3("Model Position", pos, 0.1f))
+			{
+				testObjs[0]->SetPosition(DirectX::SimpleMath::Vector3(pos[0], pos[1], pos[2]));
+			}
+		}
+	}
+	ImGui::End();
+
+	// 他ウィンドウも同じパターン
+	const bool debugOpen = ImGui::Begin("Debug");
+	if (debugOpen)
 	{
 		ImGui::Text("Enterキーで Stage1 へ");
-		ImGui::End();
 	}
+	ImGui::End();
 }
 
 // 更新
