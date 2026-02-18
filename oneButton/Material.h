@@ -41,7 +41,7 @@ public:
 		m_Material.Diffuse			= mtrl.Diffuse;
 		m_Material.Specular			= mtrl.Specular;
 		m_Material.Emission			= mtrl.Emission;
-		m_Material.Shininess			= mtrl.Shininess;
+		m_Material.Shininess		= mtrl.Shininess;
 		m_Material.TextureEnable	= mtrl.TextureEnable;
 
 		Update();

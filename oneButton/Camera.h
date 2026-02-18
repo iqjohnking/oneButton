@@ -14,9 +14,15 @@ private:
 	DirectX::SimpleMath::Vector3	m_Target{};
 	DirectX::SimpleMath::Matrix		m_ViewMatrix{};
 
+	static constexpr float	TWO_PI = 6.283185307f;
+	static constexpr float		PI = 3.1415926535f;
+
 public:
 	void Init();
 	void Update();
-	void SetCamera();
+	void SetCamera(int mode = 0);
 	void Uninit();
+
+	DirectX::SimpleMath::Vector3 GetTarget();
+	void SetTarget(DirectX::SimpleMath::Vector3 target);
 };

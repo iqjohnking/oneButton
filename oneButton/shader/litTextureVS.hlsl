@@ -19,7 +19,6 @@ PS_IN main(in VS_IN input)
 	float d = -dot(Light.Direction.xyz, worldNormal.xyz); //光の方向と法線の内積を計算
 	d = saturate(d); //dの値を0～1にクランプ
 	
-	
 	output.col.xyz = input.col.xyz * d * Light.Diffuse.xyz; // 拡散光の影響を乗算
 	output.col.xyz += input.col.xyz * Light.Ambient.xyz; // アンビエント光を加算//環境光
 	output.col.xyz += Material.Emissive.xyz; // エミッシブ色を加算//自体が光を発している

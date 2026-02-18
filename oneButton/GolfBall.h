@@ -1,6 +1,8 @@
 #pragma once
 
+
 #include "Object.h"
+//#include "Shader.h" Object.h‚Ì’†‚ª‚ ‚è‚Ü‚·
 #include "Texture.h"
 #include "MeshRenderer.h"
 #include "StaticMesh.h"

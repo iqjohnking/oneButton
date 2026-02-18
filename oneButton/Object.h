@@ -22,4 +22,5 @@ public:
 
 	// ˆÊ’u‚ÌŽæ“¾
 	DirectX::SimpleMath::Vector3 GetPosition() const { return m_Position; }
+	void SetPosition(const DirectX::SimpleMath::Vector3& position) { m_Position = position; };
 };

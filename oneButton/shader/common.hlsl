@@ -24,6 +24,8 @@ struct PS_IN
 	float4 pos : SV_POSITION;
 	float4 col : COLOR0;
 	float2 tex : TEXCOORD0;
+	//float2 posW		: TEXCOORD1;
+	//float2 normalW	: TEXCOORD2;
 };
 
 struct LIGHT

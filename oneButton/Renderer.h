@@ -38,10 +38,10 @@ enum EBlendState {
 //平行光源
 struct LIGHT {
 	BOOL 	Enable;				// ライトの有効・無効
-	BOOL 	Dummy[3];				// ダミー（構造体のサイズ合わせ）
-	DirectX::SimpleMath::Vector4	Direction;		// ライトの向き
-	DirectX::SimpleMath::Color		Diffuse;		// ディフューズカラー
 	DirectX::SimpleMath::Color		Ambient;		// アンビエントカラー
+	DirectX::SimpleMath::Color		Diffuse;		// ディフューズカラー
+	DirectX::SimpleMath::Vector4	Direction;		// ライトの向き
+	BOOL 	Dummy[3];				// ダミー（構造体のサイズ合わせ）
 };
 
 //サブセット
@@ -59,7 +59,7 @@ struct MATERIAL {
 	DirectX::SimpleMath::Color		Ambient;		// アンビエントカラー環境反射
 	DirectX::SimpleMath::Color		Diffuse;		// ディフューズカラー拡散反射
 	DirectX::SimpleMath::Color		Specular;		// スペキュラカラー　鏡面反射
-	DirectX::SimpleMath::Color		Emission;		// 発光
+	DirectX::SimpleMath::Color		Emission;		// 自発光
 	float							Shininess;		// スペキュラの強さ
 	BOOL							TextureEnable;	// 光沢の滑らかさ
 	BOOL							Dummy[2];		// ダミー（構造体のサイズ合わせ）
@@ -85,7 +85,8 @@ private:
 	static ID3D11Buffer*			m_pProjectionBuffer;
 
 	static ID3D11Buffer*			m_pLightBuffer;
-	static ID3D11Buffer*			m_pMaterialBuffer;
+	static ID3D11Buffer*			m_pMaterialBuffer;	//マテリアルバファー
+	static ID3D11Buffer*			m_pTextureBuffer;	//UV情報
 
 	static ID3D11DepthStencilState* m_pDepthStateEnable;
 	static ID3D11DepthStencilState* m_pDepthStateDisable;
@@ -129,6 +130,7 @@ public:
 
 	static void SetLight(LIGHT pLight);
 	static void SetMaterial(MATERIAL pMaterial);
+	static void SetUV(float u, float v, float uw, float vh);
 
 	//=============================================================================
 	// ブレンド ステート設定
