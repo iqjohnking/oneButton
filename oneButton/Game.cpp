@@ -67,17 +67,16 @@ void Game::Draw()
 {
 	// 描画前処理
 	Renderer::DrawStart();
+	ImGui_ImplDX11_NewFrame();
+	ImGui_ImplWin32_NewFrame();
+	ImGui::NewFrame();
+
 	// オブジェクト描画
 	for (auto& obj : m_Instance->m_Objects)
 	{
 		obj->Draw(&m_Instance->m_Camera);
 	}
 
-	// ImGui描画
-	//ImGui_ImplDX11_NewFrame();
-	//ImGui_ImplWin32_NewFrame();
-	//ImGui::NewFrame();
-	//
 	//ImGui::Begin("Debug");
 	//ImGui::Text("test string");
 	//
@@ -89,10 +88,16 @@ void Game::Draw()
 	//	m_Model.SetPosition(DirectX::SimpleMath::Vector3(pos[0], pos[1], pos[2]));
 	//}
 	//ImGui::End();
-	//
-	//ImGui::Render();
-	//ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+
+	// ImGui描画
+	if (m_Instance->m_Scene != nullptr)
+	{
+		m_Instance->m_Scene->DrawImGui();   // ★ シーン毎のUI
+	}
+	ImGui::Render();
+	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 	
+
 	// 描画後処理
 	Renderer::DrawEnd();
 }
@@ -111,9 +116,9 @@ void Game::Uninit()
 	Input::Release();
 
 	// ImGui終了処理
-	//ImGui_ImplDX11_Shutdown();
-	//ImGui_ImplWin32_Shutdown();
-	//ImGui::DestroyContext();
+	ImGui_ImplDX11_Shutdown();
+	ImGui_ImplWin32_Shutdown();
+	ImGui::DestroyContext();
 
 	// 描画終了処理
 	Renderer::Uninit();

@@ -15,6 +15,7 @@ public:
 	TitleScene(); // コンストラクタ
 	~TitleScene(); // デストラクタ
 
-	void Update(); // 更新
+	void Update() override; // 更新
+	void DrawImGui() override;
 };
 

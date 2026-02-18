@@ -1,5 +1,6 @@
 #pragma once
 #include <memory>
+#include "imgui.h"
 
 //Scene クラス
 class Scene
@@ -10,4 +11,5 @@ public:
 	virtual ~Scene(); // デストラクタ(virtualが必要)
 
 	virtual void Update() = 0; // 更新（純粋仮想関数）
+	virtual void DrawImGui() {}
 };

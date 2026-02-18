@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "Input.h"
 #include "Texture2D.h"
+#include "GolfBall.h"
 
 // コンストラクタ
 TitleScene::TitleScene()
@@ -27,6 +28,23 @@ void TitleScene::Init()
 	bg->SetScale(1920.0f, 1080.0f, 0.0f);
 	m_MySceneObjects.emplace_back(bg);
 
+
+	m_MySceneObjects.emplace_back(Game::GetInstance()->AddObject<GolfBall>());
+
+}
+
+void TitleScene::DrawImGui()
+{
+	if (ImGui::Begin("Title Scene"))
+	{
+		ImGui::Text("Enter To Stage1");
+		ImGui::End();
+	}	
+	if (ImGui::Begin("Test"))
+	{
+		ImGui::Text("Enterキーで Stage1 へ");
+		ImGui::End();
+	}
 }
 
 // 更新
