@@ -57,3 +57,9 @@ cbuffer MaterialBuffer : register(b4)
 {
 	MATERIAL Material;
 }
+
+cbuffer TextureBuffer : register(b5)
+{
+	matrix matrixTex;
+};
+

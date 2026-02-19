@@ -50,7 +50,7 @@
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -129,6 +129,7 @@
       <ConformanceMode>true</ConformanceMode>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <AdditionalIncludeDirectories>$(ProjectDir)imgui</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -138,8 +139,13 @@
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="AssimpPerse.cpp" />
+    <ClCompile Include="Attack.cpp" />
+    <ClCompile Include="backGround.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CloseEye.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="ghost.cpp" />
+    <ClCompile Include="ghostBig.cpp" />
     <ClCompile Include="GolfBall.cpp" />
     <ClCompile Include="imgui\imgui.cpp" />
     <ClCompile Include="imgui\imgui_draw.cpp" />
@@ -149,6 +155,7 @@
     <ClCompile Include="imgui\imgui_widgets.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="moji.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="ResultScene.cpp">
@@ -180,8 +187,13 @@
   <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="AssimpPerse.h" />
+    <ClInclude Include="Attack.h" />
+    <ClInclude Include="backGround.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="CloseEye.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="ghost.h" />
+    <ClInclude Include="ghostBig.h" />
     <ClInclude Include="GolfBall.h" />
     <ClInclude Include="imgui\imconfig.h" />
     <ClInclude Include="imgui\imgui.h" />
@@ -197,6 +209,7 @@
     <ClInclude Include="Material.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshRenderer.h" />
+    <ClInclude Include="moji.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="ResultScene.h">

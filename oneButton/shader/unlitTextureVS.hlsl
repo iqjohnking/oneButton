@@ -18,7 +18,12 @@ PS_IN main(in VS_IN input)
 	
 	//texture=============================
 	// テクスチャ座標はそのまま使用
-	output.tex = input.tex;
+	float4 uv;
+	uv.xy = input.tex;
+	uv.z = 0.0f;
+	uv.w = 1.0f;
+	uv = mul(uv, matrixTex);
+	output.tex = uv.xy;
 	
 	return output;
 }

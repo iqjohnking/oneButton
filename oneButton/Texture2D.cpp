@@ -60,23 +60,48 @@ void Texture2D::Update()
 	{
 		AnimClip& clip = m_AnimClips[m_CurrentClipIndex];
 
-
 		m_AnimTimer += 1;
 
 		if (m_AnimTimer >= clip.holdFrames)
 		{
 			m_AnimTimer = 0;
-			m_AnimFrame++;
 
-			if (m_AnimFrame > clip.endFrame)
+			if (m_PlayBackward)
 			{
-				m_AnimFrame = clip.startFrame;
+				m_AnimFrame--;
+
+				if (m_AnimFrame < clip.startFrame)
+				{
+					if (m_PlayOnce)
+					{
+						m_AnimFrame = clip.startFrame;
+						m_AnimEnabled = false;
+					}
+					else
+					{
+						m_AnimFrame = clip.endFrame;
+					}
+				}
+			}
+			else
+			{
+				m_AnimFrame++;
+
+				if (m_AnimFrame > clip.endFrame)
+				{
+					if (m_PlayOnce)
+					{
+						m_AnimFrame = clip.endFrame;
+						m_AnimEnabled = false;
+					}
+					else
+					{
+						m_AnimFrame = clip.startFrame;
+					}
+				}
 			}
 		}
 
-		// -----------------------------
-		// フレーム番号 → UV 計算
-		// -----------------------------
 		int col = m_AnimFrame % m_AnimCols;
 		int row = m_AnimFrame / m_AnimCols;
 
@@ -84,11 +109,10 @@ void Texture2D::Update()
 		int cellY = row + 1;
 
 		SetUV(
-			static_cast<float>(cellX),        // m_NumU
-			static_cast<float>(cellY),        // m_NumV
-			static_cast<float>(m_AnimCols),   // m_SplitX
-			static_cast<float>(m_AnimRows)    // m_SplitY
-		);
+			static_cast<float>(cellX),
+			static_cast<float>(cellY),
+			static_cast<float>(m_AnimCols),
+			static_cast<float>(m_AnimRows));
 	}
 }
 
@@ -97,6 +121,10 @@ void Texture2D::Update()
 //=======================================
 void Texture2D::Draw(Camera* cam)
 {
+	if (!isActive)
+	{
+		return;
+	}
 	//カメラを選択する
 	cam->SetCamera(1);
 
@@ -303,6 +331,9 @@ void Texture2D::PlayAnim(const std::string& name)
 
 			const AnimClip& clip = m_AnimClips[m_CurrentClipIndex];
 
+			m_PlayOnce = false;
+			m_PlayBackward = false;
+
 			m_AnimFrame = clip.startFrame;
 			m_AnimTimer = 0;
 			m_AnimEnabled = true;
@@ -312,12 +343,71 @@ void Texture2D::PlayAnim(const std::string& name)
 	}
 }
 
+
+void Texture2D::PlayAnim(const std::string& name, bool backward)
+{
+	if (m_CurrentClipIndex >= 0 &&
+		m_AnimClips[m_CurrentClipIndex].name == name &&
+		m_PlayBackward == backward)
+	{
+		return;
+	}
+	for (size_t i = 0; i < m_AnimClips.size(); ++i)
+	{
+		if (m_AnimClips[i].name == name)
+		{
+			m_CurrentClipIndex = static_cast<int>(i);
+
+			const AnimClip& clip = m_AnimClips[m_CurrentClipIndex];
+
+			m_PlayOnce = false;
+			m_PlayBackward = backward;
+			m_AnimFrame = backward ? clip.endFrame : clip.startFrame;
+			m_AnimTimer = 0;
+			m_AnimEnabled = true;
+
+			return;
+		}
+	}
+}
+
+void Texture2D::PlayAnimOnce(const std::string& name, bool backward)
+{
+	if (m_CurrentClipIndex >= 0 &&
+		m_AnimClips[m_CurrentClipIndex].name == name &&
+		m_PlayBackward == backward &&
+		m_PlayOnce)
+	{
+		return;
+	}
+	for (size_t i = 0; i < m_AnimClips.size(); ++i)
+	{
+		if (m_AnimClips[i].name == name)
+		{
+			m_CurrentClipIndex = static_cast<int>(i);
+
+			const AnimClip& clip = m_AnimClips[m_CurrentClipIndex];
+
+			m_PlayOnce = true;
+			m_PlayBackward = backward;
+			m_AnimFrame = backward ? clip.endFrame : clip.startFrame;
+			m_AnimTimer = 0;
+			m_AnimEnabled = true;
+
+			return;
+		}
+	}
+}
+
+
 void Texture2D::StopAnimation()
 {
 	m_AnimEnabled = false;
 	m_CurrentClipIndex = -1;
 	m_AnimFrame = 0;
 	m_AnimTimer = 0;
+	m_PlayBackward = false;
+	m_PlayOnce = false;
 }
 
 void Texture2D::PauseAnimation(bool pause)
