@@ -1,4 +1,5 @@
 #include "sound.h"
+#include <algorithm>
 
 #ifdef _XBOX //Big-Endian
 #define fourccRIFF 'RIFF'
@@ -139,6 +140,9 @@ void Sound::Play(SOUND_LABEL label)
 	m_pXAudio2->CreateSourceVoice(&pSV, &(m_wfx[(int)label].Format));
 	pSV->SubmitSourceBuffer(&(m_buffer[(int)label]));	// ボイスキューに新しいオーディオバッファーを追加
 
+	// 音量設定
+	m_pSourceVoice[label]->SetVolume(m_param[label].volume);
+
 	// 再生
 	pSV->Start(0);
 
@@ -167,6 +171,33 @@ void Sound::Resume(SOUND_LABEL label)
 	IXAudio2SourceVoice*& pSV = m_pSourceVoice[(int)label];
 	pSV->Start();
 }
+
+bool Sound::SetSpeed(SOUND_LABEL label, float ratio)
+{
+	IXAudio2SourceVoice* pSV = m_pSourceVoice[(int)label];
+	if (pSV == nullptr)
+	{
+		return false;
+	}
+
+	float clamped = std::clamp(ratio, XAUDIO2_MIN_FREQ_RATIO, XAUDIO2_MAX_FREQ_RATIO);
+	return SUCCEEDED(pSV->SetFrequencyRatio(clamped));
+}
+
+
+bool Sound::IsFinished(SOUND_LABEL label) const
+{
+	IXAudio2SourceVoice* pSV = m_pSourceVoice[(int)label];
+	if (pSV == nullptr)
+	{
+		return true;
+	}
+
+	XAUDIO2_VOICE_STATE state;
+	pSV->GetState(&state);
+	return state.BuffersQueued == 0;
+}
+
 
 
 

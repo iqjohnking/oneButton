@@ -19,7 +19,7 @@ protected:
 public:
 	virtual ~Object() {} // 仮想デストラクタ（※派生クラスのリソース解放のために必要）
 
-	virtual void Init()=0;
+	virtual void Init() = 0;
 	virtual void Update() = 0;
 	virtual void Draw(Camera* cam) = 0;
 	virtual void Uninit() = 0;
@@ -33,4 +33,7 @@ public:
 
 	DirectX::SimpleMath::Vector3 GetScale() const { return m_Scale; }
 	void SetScale(DirectX::SimpleMath::Vector3 scale) { m_Scale = scale; }
+
+	void SetActive(bool act) { isActive = act; }
+	bool IsActive() const { return isActive; }
 };

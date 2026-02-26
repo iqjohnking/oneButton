@@ -8,6 +8,7 @@
 #include "imgui_impl_win32.h"
 
 Game* Game::m_Instance = nullptr; // ゲームクラスのインスタンス
+Sound Game::m_Sound;
 
 // コンストラクタ
 Game::Game()
@@ -27,12 +28,13 @@ void Game::Init()
 {
 	// ゲームクラスのインスタンスを保存
 	m_Instance = new Game; 
-
 	// 描画初期化
 	Renderer::Init();
 	// 入力初期化
 	Input::Create();
 
+	//サウンド初期化
+	m_Instance->m_Sound.Init();
 	// カメラ初期化
 	m_Instance->m_Camera.Init();
 	// シーン初期化
@@ -127,6 +129,9 @@ void Game::Uninit()
 	ImGui_ImplDX11_Shutdown();
 	ImGui_ImplWin32_Shutdown();
 	ImGui::DestroyContext();
+
+	// サウンド終了処理
+	m_Sound.Uninit();
 
 	// 描画終了処理
 	Renderer::Uninit();

@@ -73,6 +73,9 @@ private:
 	int   m_AnimFrame = 0;
 	int   m_AnimTimer = 0;
 
+	bool  m_PlayBackward = false;
+	bool  m_PlayOnce = false;
+
 public:
 	void Init();				
 	void Update();				
@@ -132,6 +135,8 @@ public:
 
 	// 名前指定で再生（※ string を使うのはここだけ）
 	void PlayAnim(const std::string& name);
+	void PlayAnim(const std::string& name , bool backward);
+	void PlayAnimOnce(const std::string& name, bool backward = false);
 
 	// 現在のクリップを停止
 	void StopAnimation();

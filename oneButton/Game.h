@@ -2,6 +2,7 @@
 #include <iostream>
 #include <array>
 #include <algorithm>
+#include "sound.h"
 
 #include "TitleScene.h"
 #include "Stage1Scene.h"
@@ -17,18 +18,20 @@ enum class SceneName {
 class Game
 {
 private:
-
-	static Game* m_Instance; // ゲームクラスのインスタンス
-	Scene* m_Scene; // シーン
-
+	// ゲームクラスのインスタンス
+	static Game* m_Instance; 
+	// シーン
+	Scene* m_Scene; 
 	// カメラ
 	Camera  m_Camera;
+	//サウンド
+	static Sound m_Sound;
 
 	// オブジェクトのリスト
 	std::vector<std::unique_ptr<Object>> m_Objects; // オブジェクトのリスト
 
 	// imgui用の変数
-	bool isShowImgui = true; // ImGuiの表示フラグ
+	bool isShowImgui = false; // ImGuiの表示フラグ
 
 public:
 	Game(); // コンストラクタ
@@ -43,6 +46,9 @@ public:
 	void ChangeScene(SceneName sceneName); // シーンの切り替え
 	void DeleteObject(Object* obj); // オブジェクトの削除
 	void DeleteAllObjects(); // 全てのオブジェクトの削除
+
+	//サウンドを取得
+	static Sound* GetSound() { return &m_Sound; }
 	
 	// オブジェクトの追加
 	template <typename T> T* AddObject()
