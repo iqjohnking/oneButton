@@ -2,6 +2,7 @@
 #include <thread>
 #include "Application.h"
 #include "Game.h"
+#include "Renderer.h" // なんで必要があるのかは不明
 #include "imgui_impl_win32.h"
 
 const auto ClassName = TEXT("2025 framework ひな型");     //ウィンドウクラス名
