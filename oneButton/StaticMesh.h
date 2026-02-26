@@ -6,7 +6,7 @@
 #include	<memory>
 #include	"Texture.h"
 #include	"Mesh.h"
-#include	"renderer.h"
+#include	"Renderer.h"
 
 class StaticMesh : public Mesh {
 public:
