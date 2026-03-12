@@ -3,7 +3,7 @@
 #include	<directxmath.h>
 #include	<d3d11.h>
 #include	<wrl/client.h>
-#include	"renderer.h"
+#include	"Renderer.h"
 
 class Material {
 

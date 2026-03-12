@@ -111,6 +111,24 @@
     <ClCompile Include="Texture2D.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="CloseEye.cpp">
+      <Filter>object</Filter>
+    </ClCompile>
+    <ClCompile Include="backGround.cpp">
+      <Filter>object</Filter>
+    </ClCompile>
+    <ClCompile Include="ghost.cpp">
+      <Filter>object</Filter>
+    </ClCompile>
+    <ClCompile Include="ghostBig.cpp">
+      <Filter>object</Filter>
+    </ClCompile>
+    <ClCompile Include="Attack.cpp">
+      <Filter>object</Filter>
+    </ClCompile>
+    <ClCompile Include="moji.cpp">
+      <Filter>object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -217,6 +235,24 @@
     </ClInclude>
     <ClInclude Include="Texture2D.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="CloseEye.h">
+      <Filter>object</Filter>
+    </ClInclude>
+    <ClInclude Include="backGround.h">
+      <Filter>object</Filter>
+    </ClInclude>
+    <ClInclude Include="ghost.h">
+      <Filter>object</Filter>
+    </ClInclude>
+    <ClInclude Include="ghostBig.h">
+      <Filter>object</Filter>
+    </ClInclude>
+    <ClInclude Include="Attack.h">
+      <Filter>object</Filter>
+    </ClInclude>
+    <ClInclude Include="moji.h">
+      <Filter>object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

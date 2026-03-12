@@ -33,15 +33,15 @@ private:
 	PARAM m_param[SOUND_LABEL_MAX] =
 	{
 		{"assets/sound/bgm_1.wav"		, true , 0.08f},						// SOUND_LABEL_BGM00
-		{"assets/sound/bilibili.wav"	, true , 0.70f},							// SOUND_LABEL_SE000
-		{"assets/sound/biiiii.wav"		, true , 0.70f},							// SOUND_LABEL_SE001
-		{"assets/sound/Heartbeat04-4(Slow-Reverb-Short).wav"	, true , 1.20f},	// SOUND_LABEL_SE002
-		{"assets/sound/Heartbeat04-5(Mid-Reverb-Short).wav"		, true , 1.20f},	// SOUND_LABEL_SE003
-		{"assets/sound/Heartbeat04-6(Fast-Reverb-Short).wav"	, true , 1.20f},	// SOUND_LABEL_SE004
-		{"assets/sound/step.wav"		, true , 1.20f},							// SOUND_LABEL_SE005
-		{"assets/sound/attack.wav"		, false , 1.50f},						// SOUND_LABEL_SE006
-		{"assets/sound/dead.wav"		, false , 2.00f},						// SOUND_LABEL_SE007
-		{"assets/sound/restart.wav"		, false , 1.00f},						// SOUND_LABEL_SE008
+		{"assets/sound/bilibili.wav"	, true , 0.7f},							// SOUND_LABEL_SE000
+		{"assets/sound/biiiii.wav"		, true , 0.7f},							// SOUND_LABEL_SE001
+		{"assets/sound/Heartbeat04-4(Slow-Reverb-Short).wav"	, true , 1.2f},	// SOUND_LABEL_SE002
+		{"assets/sound/Heartbeat04-5(Mid-Reverb-Short).wav"		, true , 1.2f},	// SOUND_LABEL_SE003
+		{"assets/sound/Heartbeat04-6(Fast-Reverb-Short).wav"	, true , 1.2f},	// SOUND_LABEL_SE004
+		{"assets/sound/step.wav"		, true , 1.2f},							// SOUND_LABEL_SE005
+		{"assets/sound/attack.wav"		, false , 1.5f},						// SOUND_LABEL_SE006
+		{"assets/sound/dead.wav"		, false , 2.0f},						// SOUND_LABEL_SE007
+		{"assets/sound/restart.wav"		, false , 1.0f},						// SOUND_LABEL_SE008
 	};
 
 	IXAudio2* m_pXAudio2 = NULL;
